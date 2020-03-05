@@ -10,6 +10,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  timeLeft: number = 90;
+  interval;
+
   title = 'myapp';
   frmGrpNumber:FormGroup;
   frmGrpOTP:FormGroup;
@@ -29,6 +32,7 @@ export class AppComponent implements OnInit{
   mpinNotVerified = false;
   isOTPVerified = false;
   isOTPExpired = false;
+  authorise = false;
 
   attempts = 5;
 
@@ -75,6 +79,7 @@ export class AppComponent implements OnInit{
     this.services.primaryNumberVerify(data).subscribe(item => {
       if(item.status == true){
         this.isNumberVerified = true;
+        this.startTimer();
       }
       else{
         this.numberNotVerified = true;
@@ -113,5 +118,28 @@ export class AppComponent implements OnInit{
         this.mpinNotVerified = true;
       }
     })
+  }
+
+  resendOTP(data){
+    // let data = {
+    //   'primaryMobileNo': this.currentNumber
+    // };
+    this.timeLeft=90;
+    this.startTimer();
+    console.log(this.currentNumber);
+    console.log('CLicked!');
+    this.services.primaryNumberVerify(data).subscribe((item:any) => {
+      console.log(item);
+    });
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        clearInterval(this.interval);
+      }
+    },1000)
   }
 }

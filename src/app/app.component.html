@@ -66,10 +66,10 @@
               <p style="color: #B1B1B1;">  OTP sent to {{currentNumber}}
               </p>
               <div id="countdown">
-                <div class="timer"><span id="time">90</span></div>
+                <div class="timer"><span id="time">{{this.timeLeft}}</span></div>
                   <svg>
                     <circle r="18" cx="20" cy="20" stroke="white" stroke-width="2" fill="none"></circle>
-                    <circle id="circleAni1" r="18" cx="20" cy="20" style="display: none;"></circle>
+                    <circle id="circleAni1" r="18" cx="20" cy="20"></circle>
                     <circle id="circleAni" r="18" cx="20" cy="20"></circle>
                   </svg>
               </div>
@@ -87,14 +87,16 @@
                       >
                       <input
                         class="btn btn-default"
-                        id="resend"
                         style="border:0px; background-color: transparent; color: #B5965E; float: right;"
                         type="button"
-                        value="Resend OTP">
+                        value="Resend OTP"
+                        (click)="resendOTP(frmGrpNumber.value)"
+                        *ngIf="this.timeLeft == 0">
+                      
             </form>
           </div>
       
-          <div class="verifyMPIN" *ngIf="isNumberVerified == true && isOTPVerified == true">
+          <div class="verifyMPIN" *ngIf="isNumberVerified == true && isOTPVerified == true && authorise == false">
             <form [formGroup]="frmGrpMPIN" (ngSubmit)="postMPIN(frmGrpMPIN.value)" autocomplete="off" >
               <div class="alert alert-warning" role="alert" *ngIf="mpinNotVerified == true">
                 MPIN is not verified!
@@ -117,6 +119,22 @@
           </div>
 
         </div>
+        </div>
+
+        <div class="Authorise" *ngIf="authorise == true">
+          <div  class="card text-center" style="background-color:transparent; border: 0px;">
+            <div class="card-body" style="background-color: transparent;">
+          <form [formGroup]="frmGrpMPIN" (ngSubmit)="postMPIN(frmGrpMPIN.value)" autocomplete="off">
+            <p>Honda requires permission to:</p>
+            
+              <br/>
+                Access your Honda account details
+            <br/>
+            <br/>
+            <input class="btn btn-danger btn-block" type="submit" value="Authorize" style="background-color: #cc0000;">
+          </form>
+            </div>
+          </div>
         </div>
       </div>
   </div>
