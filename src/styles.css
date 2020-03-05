@@ -1,1 +1,133 @@
-/* You can add global styles to this file, and also import other style files */
+app-root {
+    order: 0;
+    flex: 1 1 auto;
+    align-self: auto;
+    display: block;
+  }
+
+#hondaNum {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 25px;
+    color: #ffffff;
+    width: 300px;
+    height: 30px;
+    caret-color: #cc0000;
+  }
+  body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    align-items: stretch;
+    height: 100vh;
+    background-image: radial-gradient(#3e3e3e, #151515);
+    font-family: "Roboto";
+    color: #ffffff;
+    font-size: 15px;
+    box-shadow: transparent;
+  }
+  .btn {
+    background-color: #cc0000;
+    width:100px;
+    padding:5px;
+  }
+  #partitioned {
+    padding-left: 15px;
+    letter-spacing: 42px;
+    border: 0;
+    background-color: transparent;
+    background-image: linear-gradient(to left, #ffffff 70%, rgba(255, 255, 255, 0) 0%);
+    background-position: bottom;
+    background-size: 50px 1px;
+    background-repeat: repeat-x;
+    background-position-x: 35px;
+    width: 220px;
+    min-width: 220px;
+    caret-color: #cc0000;
+    color:#ffffff;
+    outline: none;
+    -webkit-text-security: disc !important;
+  }
+  
+  #divInner{
+    left: 0;
+    position: sticky;
+  }
+  
+  #divOuter{
+    overflow: hidden;
+    width: 190px;
+  }
+  
+  #resend{
+    display: none;
+  }
+  #time{
+    font-size: 25px;
+  }
+  #countdown {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  float: right;
+  }
+  svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+  }
+  
+  #circleAni {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: none;
+  stroke-width: 2px;
+  stroke: red;
+  fill: none;
+  animation: countdown1 90s linear forwards;
+  }
+  
+  .circleAni1 {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: none;
+  stroke-width: 2px;
+  stroke: red;
+  fill: none;
+  animation: countdown1 90 linear forwards;
+  }
+  
+  .circleAni2 {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: none;
+  stroke-width: 2px;
+  stroke: red;
+  fill: none;
+  animation: countdown2 90s linear forwards;
+  }
+  
+  @keyframes countdown1 {
+  from {
+  stroke-dashoffset: 0px;
+  }
+  to {
+  stroke-dashoffset: 113px;
+  }
+  }
+  
+  @keyframes countdown2 {
+  from {
+  stroke-dashoffset: 0px;
+  }
+  to {
+  stroke-dashoffset: 113px;
+  }
+  }

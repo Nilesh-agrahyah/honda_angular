@@ -1,13 +1,124 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Myapp</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
+  <head>
+    <base href="/">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"/>
+      <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title>Honda</title>
+  </head>
 <body>
   <app-root></app-root>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+  crossorigin="anonymous"
+></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script>
+            var counter = 90;
+                  var interval = setInterval(function() {
+                      counter--;
+                      // Display 'counter' wherever you want to display it.
+                      
+                      if(counter >= 0){
+                        $('#time').text(counter);
+                      }
+                      if(counter == 0){
+                        $('#resend').show();
+                      }
+                  }, 1000);
+
+                  $(document).ready(function() {
+                    $("#resend").click(function() {
+                      var el = $(this);
+                        if (el.hasClass("clicked")) {
+                                el.removeClass("clicked");
+                                $("#circleAni1").hide();
+                                $("circle").removeClass("circleAni2");
+                                $("#circleAni").show();
+                        } else {
+                                el.addClass("clicked");
+                                $("#circleAni").hide();
+                                $("circleAni").removeClass("circleAni1");
+                                $("#circleAni1").addClass("circleAni2");
+                                $("#circleAni1").show();
+                        }
+                      $("#resend").hide();
+                      // alert("OTP resent to <%= number %>");
+                      counter = 90;
+                      var number = "<%= number %>";
+                      var settings = {
+                        url:
+                          "https://testapi.hondaconnect.in/bos/customer/verifyPrimaryContactNo",
+                        method: "POST",
+                        timeout: 0,
+                        headers: {
+                          "Content-Type": "application/json",
+                          "Authorization": "Basic YwYzigQsp5v15WmH8SVxgsgQQpJN2Ut9ckapuHN7QEGbUxmLOYRaNRFmS7pkySEk+WEzlMAuWmryrh2UgA=="
+                        },
+                        data: JSON.stringify({
+                          primaryMobileNo: number,
+                          emailId: ""
+                        })
+                      };
+
+                      $.ajax(settings).done(function(response) {
+                         console.log(response);
+                        var settings = {
+                          url: "https://oauthserver2.herokuapp.com/resendOtp",
+                          method: "POST",
+                          timeout: 0,
+                          headers: {
+                            "Content-Type": "application/json"
+                          },
+                          data: JSON.stringify({ otp: response.data.generatedOtp, key: response.data.key })
+                        };
+
+                        $.ajax(settings).done(function(response) {
+                          console.log(response);
+                        });
+                      });
+                    });
+                  });
+
+
+              var obj = document.getElementById('partitioned');
+              obj.addEventListener('keydown', stopCarret); 
+              obj.addEventListener('keyup', stopCarret); 
+
+              function stopCarret() {
+                if (obj.value.length > 3){
+                  setCaretPosition(obj, 3);
+                }
+              }
+
+              function setCaretPosition(elem, caretPos) {
+                  if(elem != null) {
+                      if(elem.createTextRange) {
+                          var range = elem.createTextRange();
+                          range.move('character', caretPos);
+                          range.select();
+                      }
+                      else {
+                          if(elem.selectionStart) {
+                              elem.focus();
+                              elem.setSelectionRange(caretPos, caretPos);
+                          }
+                          else
+                              elem.focus();
+                      }
+                  }
+              }
+            </script>
 </html>
