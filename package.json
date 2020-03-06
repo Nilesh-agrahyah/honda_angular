@@ -14,8 +14,6 @@
   "dependencies": {
     "@angular-devkit/build-angular": "~0.803.20",
     "@angular/animations": "~8.2.14",
-    "@angular/cli": "^9.0.5",
-    "typescript": "~3.5.3",
     "@angular/common": "~8.2.14",
     "@angular/compiler": "~8.2.14",
     "@angular/core": "~8.2.14",
@@ -24,14 +22,16 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "express": "^4.17.1",
+    "ngx-spinner": "^8.1.0",
     "path": "^0.12.7",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
+    "typescript": "~3.5.3",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.20",
-    "@angular/cli": "^9.0.5",
+    "@angular/cli": "^8.3.23",
     "@angular/compiler-cli": "^8.2.14",
     "@angular/language-service": "~8.2.14",
     "@types/jasmine": "~3.3.8",

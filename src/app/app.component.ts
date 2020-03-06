@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Validators,FormBuilder, FormGroup} from '@angular/forms';
 import {LoginServices} from './shared/services/login.services';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
+
 
 
 @Component({
@@ -36,7 +38,7 @@ export class AppComponent implements OnInit{
 
   attempts = 5;
 
-  constructor(private fb: FormBuilder, private services: LoginServices, private activatedRoute: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private services: LoginServices, private activatedRoute: ActivatedRoute, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -74,6 +76,7 @@ export class AppComponent implements OnInit{
   }
 
   postPrimaryNo(data){
+    this.showSpinner();
     this.currentNumber = data.primaryMobileNo;
     console.log(data);
     this.services.primaryNumberVerify(data).subscribe(item => {
@@ -89,6 +92,7 @@ export class AppComponent implements OnInit{
   }
 
   postOTP(data){
+    this.showSpinner();
     this.services.OTPVerify(data).subscribe((item:any) => {
       console.log(item);
       if(item.status == true){
@@ -109,6 +113,7 @@ export class AppComponent implements OnInit{
   }
 
   postMPIN(data){
+    this.showSpinner();
     this.services.mpinVerify(data).subscribe((item:any) => {
       if(item.status == true){
         this.mpinNotVerified = false;
@@ -121,6 +126,7 @@ export class AppComponent implements OnInit{
   }
 
   resendOTP(data){
+    this.showSpinner();
     // let data = {
     //   'primaryMobileNo': this.currentNumber
     // };
@@ -141,5 +147,14 @@ export class AppComponent implements OnInit{
         clearInterval(this.interval);
       }
     },1000)
+  }
+
+  showSpinner(){
+    this.spinner.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 3000);
   }
 }
