@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({providedIn:'root'})
 export class LoginServices {
-    baseURL="https://oauthserver2.herokuapp.com";
+    baseURL="https://alexa-oauth.herokuapp.com";
     private primaryNumberVerifyURL:string = `${this.baseURL}/honda/primary`;
     private OTPVerifyURL:string = `${this.baseURL}/honda/verifyOtp`;
     private mpinVerifyURL:string = `${this.baseURL}/honda/verifyMpin`;
